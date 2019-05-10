@@ -11,6 +11,7 @@ app.on('ready', function(){
     win = new BrowserWindow({
         width: 800,
         height: 600,
+        title: 'My App',
         webPreferences: {
             nodeIntegration: true
         }
@@ -27,10 +28,11 @@ app.on('ready', function(){
     Menu.setApplicationMenu(menu);
 });
 
-function createNewWindow(winWidth, winHeight, winFile) {
+function createNewWindow(winWidth, winHeight, winTitle, winFile) {
     newWin = new BrowserWindow({
         width: winWidth,
         height: winHeight,
+        title: winTitle,
         webPreferences: {
             nodeIntegration: true
         }
@@ -40,7 +42,9 @@ function createNewWindow(winWidth, winHeight, winFile) {
         protocol: 'file:',
         slashes: true
     }));
-    console.log(newWin);
+    newWin.on('close', function(){
+        newWin = null;
+    });
 }
 
 let mainMenu = [
@@ -65,7 +69,7 @@ let mainMenu = [
                 label: 'New',
                 accelerator: process.platform == 'darwin' ? 'Command+N' : 'Ctrl+N',
                 click(){
-                    createNewWindow(300, 200, 'newWindow.html');
+                    createNewWindow(300, 200, 'New Window', 'newWindow.html');
                 }
             },
             {

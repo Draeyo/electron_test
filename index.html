@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8"/>
         <title>My App</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="static/css/material-icons.css" rel="stylesheet">
+        <link rel="stylesheet" href="static/css/materialize.min.css">
     </head>
     <body>
         <nav>
@@ -11,8 +12,14 @@
                 <a class="brand-logo center">TEST APP</a>
             </div>
         </nav>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+        <script src="static/js/jquery-3.4.1.min.js"></script>
+        <script src="static/js/materialize.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                console.log('ready');
+            });
         </script>
+        <script>if (window.module) module = window.module;</script>
     </body>
 </html>
