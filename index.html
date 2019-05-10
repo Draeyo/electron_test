@@ -5,6 +5,8 @@
         <title>My App</title>
         <link href="static/css/material-icons.css" rel="stylesheet">
         <link rel="stylesheet" href="static/css/materialize.min.css">
+        <!-- <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script> -->
+        <!-- <script src="static/js/jquery-3.4.1.min.js"></script> -->
     </head>
     <body>
         <nav>
@@ -12,12 +14,48 @@
                 <a class="brand-logo center">TEST APP</a>
             </div>
         </nav>
-        <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-        <script src="static/js/jquery-3.4.1.min.js"></script>
+        <div>
+            <div id="versions-div"></div>
+            <div id="systemspecs-div"></div>
+            <div id="meminfo-div"></div>
+        </div>
         <script src="static/js/materialize.min.js"></script>
         <script>
-            $(document).ready(function(){
-                console.log('ready');
+            document.addEventListener("DOMContentLoaded", function(event){
+                console.log(process);
+                //versions
+                let versionsOutput = `
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h4>Versions</h4></li>
+                        <li class="collection-item">Node: <a class="secondary-content">${process.versions.node}</a></li>
+                        <li class="collection-item">Chrome: <a class="secondary-content">${process.versions.chrome}</a></li>
+                        <li class="collection-item">Electron: <a class="secondary-content">${process.versions.electron}</a></li>
+                    </ul>    
+                `;
+                let systemSpecs = `
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h4>System Specs</h4></li>
+                        <li class="collection-item">PC Name/Hostname<a class="secondary-content">${process.env.COMPUTERNAME}/${process.env.HOSTNAME}</a></li>
+                        <li class="collection-item">System Architecture<a class="secondary-content">${process.arch}</a></li>
+                        <li class="collection-item">Processor Architecture<a class="secondary-content">${process.env.PROCESSOR_ARCHITECTURE}</a></li>
+                        <li class="collection-item">Processor Identifier<a class="secondary-content">${process.env.PROCESSOR_IDENTIFIER}</a></li>
+                        <li class="collection-item">Printer<a class="secondary-content">${process.env.PRINTER}</a></li>
+                    </ul>
+                `;
+                let memoryOutput = `
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h4>Memory</h4></li>
+                        <li class="collection-item">Total<a class="secondary-content">${process.getSystemMemoryInfo().total} Ko</a></li>
+                        <li class="collection-item">In Use<a class="secondary-content">${process.getSystemMemoryInfo().total - process.getSystemMemoryInfo().free} Ko</a></li>
+                        <li class="collection-item">Free<a class="secondary-content">${process.getSystemMemoryInfo().free} Ko</a></li>
+                        <li class="collection-item">Swap Total<a class="secondary-content">${process.getSystemMemoryInfo().swapTotal} Ko</a></li>
+                        <li class="collection-item">Swap In Use<a class="secondary-content">${process.getSystemMemoryInfo().swapTotal - process.getSystemMemoryInfo().swapFree} Ko</a></li>
+                        <li class="collection-item">Swap Free<a class="secondary-content">${process.getSystemMemoryInfo().swapFree} Ko</a></li>
+                    </ul>
+                `;
+                document.getElementById('versions-div').innerHTML = versionsOutput;
+                document.getElementById('systemspecs-div').innerHTML = systemSpecs;
+                document.getElementById('meminfo-div').innerHTML = memoryOutput;
             });
         </script>
         <script>if (window.module) module = window.module;</script>

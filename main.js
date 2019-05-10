@@ -93,8 +93,8 @@ if (process.env.NODE_ENV !== 'prod') {
             {
                 label: 'DevTools',
                 accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
-                click(){
-                    win.webContents.openDevTools();
+                click(item, focusedWindow){
+                    focusedWindow.toggleDevTools();
                 }
             },
             {
