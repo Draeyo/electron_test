@@ -56,6 +56,19 @@
                 document.getElementById('versions-div').innerHTML = versionsOutput;
                 document.getElementById('systemspecs-div').innerHTML = systemSpecs;
                 document.getElementById('meminfo-div').innerHTML = memoryOutput;
+                console.log(require('os').networkInterfaces());
+                const interfaces = require('os').networkInterfaces();
+                for (var interface in interfaces){
+                    if (interface == 'Ethernet') {
+                        for (var e in interfaces['Ethernet']) {
+                            console.log(interfaces['Ethernet'][e]);
+                            if (interfaces['Ethernet'][e]['family'] == 'IPv4') {
+                                console.log('local ip : ' + interfaces['Ethernet'][e]['address']);
+                                console.log('local netmask : ' + interfaces['Ethernet'][e]['netmask']);
+                            }
+                        }
+                    }
+                }
             });
         </script>
         <script>if (window.module) module = window.module;</script>
